@@ -1,0 +1,38 @@
+{
+  "name": "gatsby-starter-exportarts",
+  "description": "A Gatsby Starter with our standard configuration",
+  "version": "0.1.0",
+  "author": {
+    "name": "Exportarts UG (haftungsbeschränkt)",
+    "email": "info@exportarts.io",
+    "url": "https://www.exportarts.io"
+  },
+  "license": "MIT",
+  "scripts": {
+    "prebuild": "gatsby clean",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "format": "prettier --parser typescript --trailing-comma es5 --no-semi --single-quote --write \"src/**/*.ts*\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "gatsby": "~2.13.52",
+    "gatsby-plugin-react-helmet": "~3.1.3",
+    "gatsby-plugin-sass": "~2.1.4",
+    "gatsby-plugin-typescript": "~2.1.2",
+    "gatsby-source-prismic": "~2.3.0-alpha.3",
+    "gatsby-transformer-typescript-css-modules": "~1.0.14",
+    "react": "~16.8.6",
+    "react-dom": "^16.8.6",
+    "react-helmet": "~5.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "~12.7.0",
+    "@types/react": "~16.8.24",
+    "@types/react-dom": "~16.8.5",
+    "@types/react-helmet": "~5.0.9",
+    "dotenv": "^8.0.0",
+    "node-sass": "^4.12.0",
+    "prettier": "^1.18.2"
+  }
+}
