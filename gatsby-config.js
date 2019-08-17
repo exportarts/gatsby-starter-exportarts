@@ -11,18 +11,36 @@ module.exports = {
     `gatsby-plugin-sass`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-typescript`,
+    // {
+    //   resolve: `gatsby-source-prismic`,
+    //   options: {
+    //     repositoryName: `repo`,
+    //     accessToken: `${process.env.PRISMIC_API_KEY}`,
+    //     linkResolver: ({ node, key, value }) => doc => {
+    //       // Available properties: https://prismic.io/docs/javascript/query-the-api/link-resolving
+    //       // TODO: Define route mapping
+    //       switch (doc.type) {
+    //         default: return null;
+    //       }
+    //     },
+    //   },
+    // },
     {
-      resolve: `gatsby-source-prismic`,
+      resolve: `gatsby-plugin-manifest`,
       options: {
-        repositoryName: `repo`,
-        accessToken: `${process.env.PRISMIC_API_KEY}`,
-        linkResolver: ({ node, key, value }) => doc => {
-          // Available properties: https://prismic.io/docs/javascript/query-the-api/link-resolving
-          // TODO: Define route mapping
-          switch (doc.type) {
-            default: return null;
-          }
-        },
+        name: `gatsby-starter-exportarts`,
+        short_name: `exportarts`,
+        start_url: `/`,
+        background_color: `#fff`,
+        theme_color: `#B2CA38`,
+        display: `standalone`,
+        // icon: './static/favicon.png'
+      },
+    },
+    {
+      resolve: "gatsby-plugin-google-tagmanager",
+      options: {
+        // id: "GTM-XXX1234"
       },
     }
   ],
