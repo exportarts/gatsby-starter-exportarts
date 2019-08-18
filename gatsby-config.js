@@ -5,8 +5,11 @@ require('dotenv').config({
 module.exports = {
   siteMetadata: {
     title: `gatsby-starter-exportarts`,
+    // siteUrl will be used for sitemap
+    siteUrl: 'https://www.example.com'
   },
   plugins: [
+    'gatsby-plugin-sitemap',
     'gatsby-transformer-typescript-css-modules',
     `gatsby-plugin-sass`,
     `gatsby-plugin-react-helmet`,
