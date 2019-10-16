@@ -1,0 +1,7 @@
+{
+  "config": {
+    "vendor-dir": "static/php/vendor"
+  },
+  "require": {
+  }
+}

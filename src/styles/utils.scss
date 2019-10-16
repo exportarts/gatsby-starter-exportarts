@@ -1,0 +1,20 @@
+@mixin unstyled() {
+  color: inherit;
+  text-decoration: none;
+  &:hover {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+a.unstyled {
+  @include unstyled();
+}
+
+.outline-none {
+  outline: none !important;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

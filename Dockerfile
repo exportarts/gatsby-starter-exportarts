@@ -19,12 +19,27 @@ COPY . .
 
 # 1. Install packages
 RUN apk update
+RUN apk add php7
+RUN apk add php7-phar
+RUN apk add php7-json
+RUN apk add php7-iconv
+RUN apk add php7-mbstring
+RUN apk add php7-openssl
+RUN apk add php7-ctype
+RUN apk add curl
+RUN apk add git
+
+# 2. Install trusted certificates for PHP
+RUN curl https://curl.haxx.se/ca/cacert.pem -o ca-bundle.crt
+RUN cp ca-bundle.crt /usr/local/share/ca-certificates
+RUN update-ca-certificates
 
 # 3. Install dependencies
 RUN yarn install --frozen-lockfile --non-interactive
 
 # 4. Build
-RUN export PRISMIC_API_KEY=${PRISMIC_API_KEY} && yarn build --noColor
+RUN export PRISMIC_API_KEY=${PRISMIC_API_KEY} \
+    && yarn build --no-color
 
 # 5. Deploy
 RUN apk add sshpass

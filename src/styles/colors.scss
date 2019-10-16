@@ -1,0 +1,8 @@
+@import './variables.scss';
+
+@each $name, $code in $colors {
+  .color-#{$name} { color: $code !important }
+  .bg-#{$name} { background-color: $code !important }
+  .border-#{$name} { border-color: $code !important }
+  .fill-#{$name} { fill: $code !important }
+}
