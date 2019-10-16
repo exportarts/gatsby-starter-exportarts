@@ -11,6 +11,7 @@ pipeline {
     HOSTING_DOMAIN = 'example.com'
     TARGET_DIR = '/httpdocs/project'
     PRISMIC_TOKEN = credentials('credential')
+    SENTRY_TOKEN = credentials('sentry-auth-token')
     DOCKER_TAG = 'project'
     DOCKERFILE_PATH = 'Dockerfile'
   }
@@ -37,6 +38,7 @@ pipeline {
             --build-arg IMAGE_LABEL=${DOCKER_TAG}-${BRANCH_NAME} \
             --build-arg PRISMIC_API_KEY=${PRISMIC_TOKEN} \
             -f ${DOCKERFILE_PATH} .'
+        sh 'sh sentry-release.sh ${SENTRY_TOKEN} ${DOCKER_TAG} ${BRANCH_NAME}'
       }
     }
   }
