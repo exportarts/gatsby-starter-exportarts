@@ -27,16 +27,17 @@ if (process.env.SENTRY_DSN) {
     }
   })
 }
-if (process.env.PRISMIC_API_KEY) {
+const schemas = {
+  // Todo: Add your custom types
+  // page: require('./src/schemas/page.json'),
+};
+if (process.env.PRISMIC_API_KEY && Object.keys(schemas).length > 0) {
   dynamicPlugins.push({
     resolve: 'gatsby-source-prismic',
     options: {
       repositoryName: process.env.PRISMIC_REPO_NAME,
       accessToken: process.env.PRISMIC_API_KEY,
-      schemas: {
-        // Todo: Add your custom types
-        // page: require('./src/schemas/page.json'),
-      }
+      schemas
     }
   })
 }
