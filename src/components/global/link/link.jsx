@@ -21,11 +21,17 @@ function getFragmentFromLink(link) {
 const onAnchorScroll = (event, targetID, callback) => {
     event.preventDefault();
     const targetElement = document.getElementById(targetID);
-    targetElement.scrollIntoView({
-        behavior: 'smooth'
-    });
+    if (targetElement) {
+        targetElement.scrollIntoView({
+            behavior: 'smooth'
+        });
+    } else {
+        console.warn(`Tried to scroll to element with ID "${targetID}", but it could not be found.`);
+    }
 
-    return callback(event);
+    if (callback) {
+        return callback(event);
+    }
 }
 
 // Since DOM elements <a> cannot receive activeClassName
