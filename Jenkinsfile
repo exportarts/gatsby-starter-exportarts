@@ -30,7 +30,7 @@ pipeline {
       steps {
         sh 'docker build \
             -t ${DOCKER_TAG}-${BRANCH_NAME} \
-            --build-arg SITE_PATH=${BRANCH_NAME} \
+            --build-arg BRANCH_NAME=${BRANCH_NAME} \
             --build-arg DEPLOY_USER=${HOSTING_CREDS_USR} \
             --build-arg DEPLOY_PASS=${HOSTING_CREDS_PSW} \
             --build-arg HOSTING_DOMAIN=${HOSTING_DOMAIN} \

@@ -7,6 +7,7 @@ ARG DEPLOY_PASS
 ARG PRISMIC_API_KEY
 ARG HOSTING_DOMAIN
 ARG TARGET_DIR
+ARG BRANCH_NAME
 
 # We need label to be able to delete images afterwards
 ARG IMAGE_LABEL
@@ -28,11 +29,12 @@ RUN curl https://curl.haxx.se/ca/cacert.pem -o ca-bundle.crt && \
 RUN yarn install --frozen-lockfile --non-interactive
 
 # 4. Build
-RUN export PRISMIC_API_KEY=${PRISMIC_API_KEY} && \
+RUN export BRANCH_NAME=${BRANCH_NAME} && \
+    export PRISMIC_API_KEY=${PRISMIC_API_KEY} && \
     yarn build --no-color
 
 # 5. Deploy
 RUN apk add sshpass openssh
-RUN sshpass -p $DEPLOY_PASS ssh -o StrictHostKeyChecking=no $DEPLOY_USER@$HOSTING_DOMAIN "rm -rf $TARGET_DIR/$SITE_PATH/*" && \
-    sshpass -p $DEPLOY_PASS ssh -o StrictHostKeyChecking=no $DEPLOY_USER@$HOSTING_DOMAIN "mkdir -p $TARGET_DIR/$SITE_PATH" && \
-    sshpass -p $DEPLOY_PASS scp -o StrictHostKeyChecking=no -r ./public/* $DEPLOY_USER@$HOSTING_DOMAIN:$TARGET_DIR/$SITE_PATH
+RUN sshpass -p $DEPLOY_PASS ssh -o StrictHostKeyChecking=no $DEPLOY_USER@$HOSTING_DOMAIN "rm -rf $TARGET_DIR/$BRANCH_NAME/*" && \
+    sshpass -p $DEPLOY_PASS ssh -o StrictHostKeyChecking=no $DEPLOY_USER@$HOSTING_DOMAIN "mkdir -p $TARGET_DIR/$BRANCH_NAME" && \
+    sshpass -p $DEPLOY_PASS scp -o StrictHostKeyChecking=no -r ./public/* $DEPLOY_USER@$HOSTING_DOMAIN:$TARGET_DIR/$BRANCH_NAME
