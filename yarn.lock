@@ -5078,10 +5078,10 @@ gatsby-source-filesystem@^2.0.33:
     valid-url "^1.0.9"
     xstate "^4.6.7"
 
-gatsby-source-prismic@3.0.0-beta.11:
-  version "3.0.0-beta.11"
-  resolved "https://registry.yarnpkg.com/gatsby-source-prismic/-/gatsby-source-prismic-3.0.0-beta.11.tgz#89842557d74a3b6e54fd9a4c5c93e5fd8496a166"
-  integrity sha512-Twbni8CtEA4PjZxWbhM59wrX5twHq92jRqDCX9C1SpeH4DniODgfBIF22AcpBkjZY/5EjQbPHXIjxDYFSLjvyw==
+gatsby-source-prismic@3.0.0-beta.14:
+  version "3.0.0-beta.14"
+  resolved "https://registry.yarnpkg.com/gatsby-source-prismic/-/gatsby-source-prismic-3.0.0-beta.14.tgz#1bd5d2f5cfbe11feb3281f120c71e512a4afd751"
+  integrity sha512-xnUiJvGO4nmxryr1uowyRz4/plGxW2XeynbxrPkIcGcS7iVlQJGf1/aoC2aGzs7LbHT2MbVDMUlXkpWIt6OB+w==
   dependencies:
     camelcase "^5.3.1"
     compose-tiny "^1.1.3"
