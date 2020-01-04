@@ -39,6 +39,16 @@ if (isBranchMaster) {
   });
 }
 
+const robotsPolicy = isBranchMaster ? [{ userAgent: '*', allow: '/' }] : [{ userAgent: '*', disallow: '/' }];
+dynamicPlugins.push({
+  resolve: 'gatsby-plugin-robots-txt',
+  options: {
+    host: process.env.SITE_URL,
+    sitemap: process.env.SITE_URL + '/sitemap.xml',
+    policy: robotsPolicy
+  }
+});
+
 const schemas = {
   // Todo: Add your custom types
   // page: require('./src/schemas/page.json'),
@@ -122,21 +132,6 @@ module.exports = {
         //   },
         // ]
       },
-    },
-    {
-      resolve: 'gatsby-plugin-robots-txt',
-      options: {
-        host: process.env.SITE_URL,
-        sitemap: process.env.SITE_URL + '/sitemap.xml',
-        env: {
-          development: {
-            policy: [{ userAgent: '*', disallow: ['/'] }]
-          },
-          production: {
-            policy: [{ userAgent: '*', allow: '/' }]
-          }
-        }
-      }
     }
   ],
 }
