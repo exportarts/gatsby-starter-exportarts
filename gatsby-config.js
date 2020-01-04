@@ -5,11 +5,16 @@ require('dotenv').config({
 // Set additional configuration as env vars
 process.env.SITE_URL = 'https://www.example.com';
 process.env.GTM_ID = undefined;
+process.env.GA_PROPERTY_ID = undefined;
 process.env.SENTRY_DSN = undefined;
 process.env.PRISMIC_REPO_NAME = undefined;
 
+// Make certain vars available in the browser
+process.env.GATSBY_GA_PROPERTY_ID = process.env.GA_PROPERTY_ID;
+
 const dynamicPlugins = [];
-if (process.env.GTM_ID && process.env.BRANCH_NAME && process.env.BRANCH_NAME === 'master') {
+const isBranchMaster = process.env.BRANCH_NAME && process.env.BRANCH_NAME === 'master';
+if (process.env.GTM_ID && isBranchMaster) {
   dynamicPlugins.push({
     resolve: "gatsby-plugin-google-tagmanager",
     options: {
