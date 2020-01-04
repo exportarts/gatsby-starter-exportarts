@@ -18,6 +18,26 @@ pipeline {
 
   stages {
 
+    stage('Build Only') {
+      when { 
+        branch 'renovate/*'
+      }
+
+      steps {
+        sh 'docker build \
+            -t ${DOCKER_TAG}-${BRANCH_NAME} \
+            --build-arg PRISMIC_API_KEY=${PRISMIC_TOKEN} \
+            --build-arg BRANCH_NAME=${BRANCH_NAME} \
+            -f build-only.dockerfile .'
+      }
+
+      post {
+        cleanup {
+          sh "docker image rm ${DOCKER_TAG}-${BRANCH_NAME}"
+        }
+      }
+    }
+    
     stage('Build & Deploy') {
       when {
         anyOf {
@@ -35,17 +55,23 @@ pipeline {
             --build-arg DEPLOY_PASS=${HOSTING_CREDS_PSW} \
             --build-arg HOSTING_DOMAIN=${HOSTING_DOMAIN} \
             --build-arg TARGET_DIR=${TARGET_DIR} \
-            --build-arg IMAGE_LABEL=${DOCKER_TAG}-${BRANCH_NAME} \
             --build-arg PRISMIC_API_KEY=${PRISMIC_TOKEN} \
-            -f ${DOCKERFILE_PATH} .'
-        sh 'sh sentry-release.sh ${SENTRY_TOKEN} ${DOCKER_TAG} ${BRANCH_NAME}'
+            -f Dockerfile .'
+      }
+
+      post {
+        success {
+          sh 'sh sentry-release.sh ${SENTRY_TOKEN} ${DOCKER_TAG} ${BRANCH_NAME}'
+        }
+        cleanup {
+          sh "docker image rm ${DOCKER_TAG}-${BRANCH_NAME}"
+        }
       }
     }
   }
   post {
     always {
-      sh 'docker system prune --filter "label=image=${DOCKER_TAG}-${BRANCH_NAME}" -a -f'
-      deleteDir() /* clean up our workspace */
+      deleteDir()
     }
   }
 }
