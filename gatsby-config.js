@@ -27,6 +27,18 @@ if (process.env.SENTRY_DSN) {
     }
   })
 }
+if (isBranchMaster) {
+  dynamicPlugins.push({
+    resolve: 'gatsby-plugin-htaccess',
+    options: {
+      host: process.env.SITE_URL.replace('https://', ''),
+      https: true,
+      www: true,
+      SymLinksIfOwnerMatch: true
+    }
+  });
+}
+
 const schemas = {
   // Todo: Add your custom types
   // page: require('./src/schemas/page.json'),
