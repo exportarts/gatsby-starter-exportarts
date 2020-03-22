@@ -34,8 +34,8 @@
     "gatsby-source-prismic": "3.0.0-beta.14",
     "gatsby-transformer-sharp": "2.3.12",
     "gatsby-transformer-typescript-css-modules": "1.0.14",
-    "react": "16.13.0",
-    "react-dom": "16.13.0",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
     "react-helmet": "5.2.1",
     "smoothscroll-polyfill": "0.4.4"
   },
